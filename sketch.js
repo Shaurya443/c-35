@@ -1,6 +1,6 @@
 var balloon,balloonImage1,balloonImage2;
 // create database and position variable here
-var ballon
+//var ballon
 function preload(){
    bg =loadImage("cityImage.png");
    balloonImage1=loadAnimation("hotairballoon1.png");
@@ -18,8 +18,8 @@ function setup() {
   balloon.addAnimation("hotAirBalloon",balloonImage1);
   balloon.scale=0.5;
 
-  var ballonPosition = database.ref("ballon/height")
-  ballonPosition.on("value" ,readHeight, showError)
+  var balloonPosition = database.ref("balloon/height")
+  balloonPosition.on("value" ,readHeight, showError)
 
   //textSize(20); 
 }
@@ -29,29 +29,28 @@ function draw() {
   background(bg);
 
   if(keyDown(LEFT_ARROW)){
-    balloon.addAnimation("hotAirBalloon",balloonImage2);
     //write code to move air balloon in left direction
     updateHeight(-10,0)
+    balloon.addAnimation("hotAirBalloon",balloonImage2);
   }
   else if(keyDown(RIGHT_ARROW)){
-    balloon.addAnimation("hotAirBalloon",balloonImage2);
     //write code to move air balloon in right direction
     updateHeight(10,0)
+    balloon.addAnimation("hotAirBalloon",balloonImage2);
   }
   else if(keyDown(UP_ARROW)){
       //write code to move air balloon in up direction
     updateHeight(0,-10)
     balloon.addAnimation("hotAirBalloon",balloonImage2);
-    ballon.scale =  ballon.scale -0.01
+    balloon.scale =  balloon.scale -0.01
   
     
   }
   else if(keyDown(DOWN_ARROW)){
-    balloon.addAnimation("hotAirBalloon",balloonImage2);
     //write code to move air balloon in down direction
     updateHeight(0,10)
     balloon.addAnimation("hotAirBalloon",balloonImage2);
-    ballon.scale =  ballon.scale +0.01
+    balloon.scale =  balloon.scale +0.01
   
   }
 
@@ -63,18 +62,18 @@ function draw() {
 }
 
 function updateHeight(x,y){
-  database.ref("ballon/height").set({
-    'x': height.x+x,
-    'y': height.y+y
-  }
-)
+  database.ref('balloon/height').set({
+    'x':height.x + x,
+    'y':height.y + y
+  })
+
 
 }
 
 function readHeight(data){
 height = data.val()
-ballon.x = height.x
-ballon.y = height.y
+balloon.x = height.x
+balloon.y = height.y
 }
 
 function showError(){
